@@ -3,10 +3,7 @@
 netmodeler.h : 
 	tmpnm=`tempfile`
 	rm -f netmodeler.h;
-	echo "#ifndef __STARSKY_NETMODELER__" > $tmpnm	
-	echo "#define __STARSKY_NETMODELER__" >> $tmpnm	
-	ls *.h | sed -e 's/\(.*\)/#include "\1"/' >> $tmpnm
-	echo "#endif" >> $tmpnm	
+	ls *.h | sed -e 's/\(.*\)/#include "\1"/' > $tmpnm
 	mv $tmpnm netmodeler.h
 
 noinst_PROGRAMS = netmodeler
@@ -133,6 +130,8 @@ prefdelcompnetwork.cpp \
 prefdelcompnetwork.h \
 prefdelcompattnetwork.cpp \
 prefdelcompattnetwork.h \
+parent.cpp \
+parent.h \
 ran1random.cpp \
 ran1random.h \
 random.cpp \
@@ -150,6 +149,12 @@ simkinnetwork.cpp \
 simkinnetwork.h \
 simplerulenet.h \
 simplerulenet.cpp \
+simplemessage.h \
+simplemessage.cpp \
+simplenode.h \
+simplenode.cpp \
+simplenetwork.h \
+simplenetwork.cpp \
 sitepercmessage.h \
 sitepercmessage.cpp \
 smallworldnetwork.cpp \
@@ -179,4 +184,5 @@ weightededge.h \
 weightededge.cpp \
 weightednetwork.h \
 weightednetwork.cpp \
-weightednetworkfactory.h weightednetworkfactory.cpp
+weightednetworkfactory.h weightednetworkfactory.cpp \
+simnodeAction.h simnodeAction.cpp 

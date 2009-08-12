@@ -471,7 +471,7 @@ class Network {
 	/**
 	 * @return a new network of the same type as the one called on
 	 */
-	virtual Network* newNetwork() const;
+	virtual Network* newNetwork() const ;
 	/**
 	 * Prints the network out to graphviz (for now) format.
 	 */

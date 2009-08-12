@@ -19,25 +19,25 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#include <broadcastmessage.h>
-#include <memory>
+#include <simplemessage.h>
+
 using namespace Starsky;
 using namespace std;
 
-BroadcastMessage::BroadcastMessage(int ttl) : _ttl(ttl)
+SimpleMessage::SimpleMessage(int ttl) : _ttl(ttl)
 {
 }
 
-Network* BroadcastMessage::visit(Node* n, Network& net)
+SimpleNetwork* SimpleMessage::visit(Node* n, Network& net)
 {
-    map<int, Network::NodePSet > to_visit;
+    map<int, Network::NodePSet> to_visit;
     map<int, Network::NodePSet >::iterator tv_it;
     Network::NodePSet::iterator a_it;
-
-    to_visit[0].insert(n);
-    Network* new_net = net.newNetwork() ;
-    
-new_net->add( n );
+    //auto_ptr<SimpleNetwork> new_net (new SimpleNetwork());
+    SimpleNetwork* new_net = dynamic_cast<SimpleNetwork*> (net.newNetwork() );
+    SimpleNode* node = dynamic_cast<SimpleNode*> (n);
+    to_visit[0].insert(node);
+    new_net->add( node );
     int this_distance;
     //We loop through at each TTL:
     tv_it = to_visit.begin();
@@ -48,8 +48,8 @@ new_net->add( n );
             auto_ptr<EdgeIterator> ei( net.getEdgeIterator(*a_it) );
             while( ei->moveNext() ) {
 	      Edge* this_edge = ei->current();
-              Node* this_node = this_edge->getOtherNode(*a_it);
-	      //Make sure to consider potential directionality 
+              SimpleNode* this_node = dynamic_cast<SimpleNode*> (this_edge->getOtherNode(*a_it) );
+              //Make sure to consider potential directionality 
               if( this_edge->connects(*a_it, this_node) ) {
 		 if( !new_net->has( this_node ) ) {
                   //We have not seen this one yet.
@@ -64,5 +64,7 @@ new_net->add( n );
         to_visit.erase(tv_it);
         tv_it = to_visit.begin();
     }
+    //cout << "visit's return net size: " << new_net->getNodeSize() << endl;
     return new_net;
+    //delete new_net;
 }

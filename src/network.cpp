@@ -1109,8 +1109,8 @@ int Network::incrementvRefCount(void* p) {
     return -1;
 }
 
-Network* Network::newNetwork() const {
-  return new Network();
+Network* Network::newNetwork() const {  
+return new Network();
 }
 
 void Network::printTo(ostream& out) const {

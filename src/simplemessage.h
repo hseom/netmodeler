@@ -19,13 +19,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifndef starsky__broadcastmessage
-#define starsky__broadcastmessage
+#ifndef starsky__simplemessage
+#define starsky__simplemessage
 
 #include <message.h>
-#include <node.h>
-#include <network.h>
-
+#include <simplenode.h>
+#include <simplenetwork.h>
 
 namespace Starsky {
 
@@ -39,10 +38,10 @@ namespace Starsky {
  * 
  */
 	
-class BroadcastMessage : public Message {
+class SimpleMessage : public Message {
 
   public:
-    BroadcastMessage(int ttl=-1);
+    SimpleMessage(int ttl=-1);
     /**
      * This will return all the nodes and edges in the
      * out component of a particular Node within a number of hops
@@ -50,7 +49,7 @@ class BroadcastMessage : public Message {
      * @param aNet the network that the message will travel on
      * @return a network consisting of all the nodes and edges crossed in a broadcast.
      */
-    virtual Network* visit(Node* anode, Network& aNet);	
+    virtual SimpleNetwork* visit(Node* anode, Network& aNet);	
   protected:
     int _ttl;
 };

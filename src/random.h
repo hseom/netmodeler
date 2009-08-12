@@ -24,6 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <stdexcept>
 #include <vector>
+#include <cmath>
 
 namespace Starsky {
 
@@ -47,6 +48,7 @@ class Random {
      * @return an integer less than or equal to high, and greater than or equal to low
      */
     virtual int getInt(int high, int low=0);
+    virtual double getExp(double lambda);
     
     /**
      * Get a bool that is 50/50 
